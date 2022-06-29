@@ -17,7 +17,6 @@ class AuthController extends Controller
         ]);
         
         if (Auth::attempt($request->only('email', 'password'))) {
-
             return response()->json(Auth::user(), 200);
         } else {
             return response()->json(['status_message' => 'Failed to log you in']);
@@ -35,13 +34,15 @@ class AuthController extends Controller
     public function register(Request $request) {
 
         $request->validate([
-            'name' => ['required'],
+            'first_name' => ['required'],
+            'last_name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'password' => ['required', 'min:8', 'confirmed']
         ]);
 
         User::create([
-            'name' => $request->name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
