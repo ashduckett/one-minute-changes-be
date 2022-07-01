@@ -31,8 +31,6 @@ class AppServiceProvider extends ServiceProvider
             // Get all of the chord changes
             $chordChanges = ChordChange::all();
 
-            // dd($chordChanges);
-
             $chordChanges->each(function($change) use ($model) {
                 $chordChange = new UserChordChange();
                 $chordChange->user_id = $model->id;
