@@ -13,9 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('chords', function (Blueprint $table) {
+        Schema::create('user_chord_changes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('chord_change_id')->constrained();
+            $table->integer('count');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('chords');
+        Schema::dropIfExists('user_chord_changes');
     }
 };
