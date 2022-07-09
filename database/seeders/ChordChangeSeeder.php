@@ -27,6 +27,7 @@ class ChordChangeSeeder extends Seeder
 
         DB::table('chord_changes')->insert(['from_id' => $dChord->id, 'to_id' => $aChord->id]);
         DB::table('chord_changes')->insert(['from_id' => $eChord->id, 'to_id' => $aChord->id]);
+        
         DB::table('chord_changes')->insert(['from_id' => $eChord->id, 'to_id' => $dChord->id]);
         DB::table('chord_changes')->insert(['from_id' => $amChord->id, 'to_id' => $aChord->id]);
         DB::table('chord_changes')->insert(['from_id' => $amChord->id, 'to_id' => $dChord->id]);
