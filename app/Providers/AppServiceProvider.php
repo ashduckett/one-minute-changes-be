@@ -7,6 +7,7 @@ use App\Models\UserChordChange;
 use App\Models\ChordChange;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Schema::defaultStringLength(191);
         User::created(function($model) {
             // Get all of the chord changes
             $chordChanges = ChordChange::all();
