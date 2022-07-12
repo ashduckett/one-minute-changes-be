@@ -39,7 +39,8 @@ class UserController extends Controller
             'userId' => ['required']
         ]);
 
-        UserChordChange::where('id', $request->chordChangeId)
+
+        UserChordChange::where(['chord_change_id' => $request->chordChangeId, 'user_id' => $request->userId])
             ->update([
                 'count' => $request->count
             ]);
