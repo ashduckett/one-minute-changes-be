@@ -19,7 +19,7 @@ class AuthController extends Controller
         if (Auth::attempt($request->only('email', 'password'))) {
             return response()->json(Auth::user(), 200);
         } else {
-            return response()->json(['status_message' => 'Failed to log you in']);
+            return response()->json(['status_message' => 'Failed to log you in', 'status_code' => 401]);
         }
 
         
@@ -32,6 +32,16 @@ class AuthController extends Controller
     }
 
     public function register(Request $request) {
+        // Before Laravel validation, check to see if the email exists so a custom response is possible
+        $email = $request->email;
+        if (User::where('email', '=', $request->email)->exists()) {
+            return response()->json(['status_message' => 'Email already exists', 'status_code' => 401]);
+        }
+
+
+        // return $email;
+        
+        
         $request->validate([
             'first_name' => ['required'],
             'last_name' => ['required'],
@@ -46,6 +56,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
+        return response()->json(['status_message' => 'User successfully created', 'status_code' => 200]);
 
     }
 
